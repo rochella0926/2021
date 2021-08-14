@@ -1,0 +1,52 @@
+#결측치 만들기
+df<- data.frame(sex=c("M","F",NA,"M","F"),
+                score=c(5,4,3,4,NA))
+df
+#결측치 찾기
+is.na(df)
+table(is.na(df))
+
+table(is.na(df$sex))
+table(is.na(df$score))
+
+mean(df$score)
+sum(df$score)
+
+#결측치 제거하기
+library(dplyr)
+df %>% filter(is.na(score))
+df %>% filter(!is.na(score))
+
+df_nomiss<-df %>% filter(!is.na(score))
+mean(df_nomiss$score)
+sum(df_nomiss$score)
+
+#score,sex 결측치 제외
+df_nomiss<-df %>% filter(!is.na(score)&!is.na(sex))
+df_nomiss
+
+#결측치가 하나라도 있으면 제거
+df_nomiss2<-na.omit(df)
+df_nomiss2
+
+#함수의 결측치 제외 기능 이용하기
+get()
+setwd("D:/R_sample")
+exam<-read.csv("csv_exam.csv")
+exam
+exam[c(3,8,15),"math"]<-NA
+table(is.na(exam$math))
+
+exam %>% summarise(mean_math=mean(math))
+exam %>% summarise(mean_math=mean(math, na.tm=T))
+exam %>% summarise(mean_math=mean(math, na.tm=T),
+                   sum_math=sum(math, na.rm=T),
+                   median_math=median(math, na.rm=T))
+#결측치 대체하기
+mean(exam$math, na.rm=T)
+
+exam$math<-ifelse(is.na(exam$math), 55, exam$math)
+table(is.na(exam$math))                   
+
+exam
+

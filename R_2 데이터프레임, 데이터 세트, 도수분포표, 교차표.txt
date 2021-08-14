@@ -1,0 +1,96 @@
+#데이터 프레임 만들기
+
+#readxl설치 및 파일 불러오기
+install.packages("readxl")
+library(readxl)
+getwd()
+setwd("D:/R_sample")
+df_exam<-read_excel("excel_exam.xlsx")
+df_exam
+
+#첫번째행을 변수명으로 인식
+df_exam_novar<-read_excel("excel_exam_novar.xlsx",col_names=F)
+df_exam_novar
+
+#시트가 여러개 있는 경우
+df_exam_sheet<-read_excel("excel_exam_sheet.xlsx",sheet=3)
+df_exam_sheet
+
+#csv파일 불러오기
+df_csv_exam<-read.csv("csv_exam.csv")
+df_csv_exam
+
+#데이터세트의 데이터 보기
+data(quakes)
+quakes
+head(quakes,n=10)
+tail(quakes,n=6)
+
+name(quakes)
+str(quakes)
+dim(quakes)
+summary(quakes)
+summary(quakes$mag)
+help(quakes)
+
+
+#데이터 세트에서 조건에 맞는 내용조회
+DF<-read.csv("example_studentlist.csv")
+subset(DF,subset=(height>170))
+subset(DF,select=c(name,height),subset=(height>180))
+subset(DF,select=-height)
+subset(DF,select = c(-height,-weight))
+
+##데이터 세트에서 조건에 맞는 내용 조회_혼자해보기
+#Q1
+str(mtcars)
+#Q2
+?mtcars
+#Q3
+Q3<-subset(mtcars,subset=(cyl=c(4,6)&am==0),select=c(mpg,cyl,am))
+Q3
+mean(Q3$mpg)
+#Q4
+Q4<-subset(mtcars,subset=(cyl=c(4,6)&am==1),select=c(mpg,cyl,am))
+Q4
+mean(Q4$mpg)
+
+
+#데이터 세트에 새로운 변수 추가하기
+DF<-read.csv("example_studentlist.csv")
+BMI<-DF$weight/DF$height^2
+BMI
+DF<-cbind(DF,BMI)
+DF
+
+#두개의 데이터 프레임 병합
+#cbind로 새로운 데이터 열을 추가하려고 했으나 관찰치 순서가 서로 다른경우
+DF<-read.csv("example_studentlist.csv")
+DF
+Omit<-read.csv("omit.csv")
+Omit
+DF<-merge(DF,Omit,by="name")
+DF
+
+#명목형 변수로 도수분포표 만들기
+DF<-read.csv("example_studentlist.csv")
+DF
+Freq<-table(DF$bloodtype)
+Freq
+RelativeFreq<-prop.table(Freq)
+RelativeFreq
+Table<-rbind(Freq,RelativeFreq)
+Table
+Table<-addmargins(Table,margin=2)
+Table
+ 
+#교차표만들기
+DF<-read.csv("example_studentlist.csv")
+CT<-table(DF$sex,DF$bloodtype)
+CT
+addmargins(CT)
+PropCT<-prop.table(CT);PropCT
+addmargins(PropCT)
+PropCT<-prop.table(CT,margin=1)
+PropCT
+addmargins(PropCT,margin=2)

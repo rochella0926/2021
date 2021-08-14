@@ -1,0 +1,15 @@
+#1
+mpg<-as.data.frame(ggplot2::mpg)
+MPG<-mpg
+MPG<-MPG%>% mutate(total=cty+hwy)
+
+#2
+MPG<-MPG%>% mutate(total/2)
+
+#3
+MPG %>% arrange(desc(mean)) %>% head(3)
+
+#4
+mpg %>% mutate(total=cty+hwy,
+               mean=total/2) %>% 
+  arrange(desc(mean)) %>% head(3)
