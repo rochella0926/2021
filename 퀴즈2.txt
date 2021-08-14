@@ -1,0 +1,14 @@
+#include<stdio.h>
+
+int main()
+{
+	int number;
+
+	printf("값을 입력하세요");
+	scanf_s("%d", &number);
+
+	if (number == 100)
+		printf("100입니다.\n");
+	else
+		printf("100이 아닙니다.\n");
+}

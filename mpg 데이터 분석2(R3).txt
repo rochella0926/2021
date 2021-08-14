@@ -1,9 +1,0 @@
-#1
-mpg_n<-mpg %>% select(class,cty)
-head(mpg_n)
-
-#2
-SUV<-mpg %>% filter(class=="suv") 
-COM<-mpg %>% filter(class=="compact")
-mean(SUV$cty)
-mean(COM$cty)

@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main()
+{
+	int a, h, m, s;
+
+	printf("## 계산할 초는?");
+	scanf_s("%d", &a);
+
+	h =a / 3600;
+	a = a % 3600;
+
+	m = a / 60;
+	a = a % 60;
+
+	s = a;
+	
+
+	printf("\n 시간은 ==> %d 시간 \n", h);
+	printf("\n 분은 ==> %d 분\n", h);
+	printf("\n 초는 ==> %d 초 \n",s);
+	
+}
