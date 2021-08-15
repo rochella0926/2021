@@ -1,0 +1,16 @@
+#include<stdio.h>
+
+int main()
+{
+	int hap = 0;
+	int i;
+	int n1, n2, n3;
+
+	printf("시작값, 끝값, 증가값 입력 : ");
+	scanf_s("%d %d %d", &n1, &n2, &n3);
+
+	for (i = n1;i <= n2;i += n3) {
+		hap = hap + i;
+	}
+	printf("%d에서 %d까지 %d만큼 증가한 값의 합: %d\n", n1, n2, n3, hap);
+}
